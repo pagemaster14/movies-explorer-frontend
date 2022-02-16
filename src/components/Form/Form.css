@@ -16,6 +16,8 @@
 
 .form {
     min-width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .form__input-container {
@@ -71,8 +73,9 @@
 
 .form__button {
     margin-top: 240px;
+    align-self: center;
     padding: 0;
-    min-width: 100%;
+    min-width: 260px;
     min-height: 45px;
     font-weight: 500;
     font-size: 12px;
@@ -86,6 +89,7 @@
 
 @media screen and (min-width: 768px) {
     .form__button {
+        min-width: 396px;
         margin-top: 134px;
         font-size: 14px;
         line-height: 17px;

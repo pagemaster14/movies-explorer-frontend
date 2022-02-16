@@ -2,7 +2,7 @@ import "./Footer.css";
 
 function Footer(props) {
     return (
-<section className="footer">
+<footer className="footer">
 <h2 className="footer__title">
 Учебный проект Яндекс.Практикум х BeatFilm.
 </h2>
@@ -20,7 +20,7 @@ VK
 </div>
 <p className="footer__copyright"> ©2022 </p>
 </div>
-</section>
+</footer>
     );
   }
   

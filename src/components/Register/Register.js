@@ -7,7 +7,7 @@ import logo from "../../images/logo.svg";
 function Register(props) {
     return (
         <>
-            <section className="register">
+            <main className="register">
                 <Link to="/" className="register__link">
                     <img src={logo} alt="Логотип Movies-explorer" className="form__logo" />
                 </Link>
@@ -50,7 +50,7 @@ function Register(props) {
                         Войти
                     </Link>
                 </div>
-            </section>
+            </main>
         </>
     );
 }

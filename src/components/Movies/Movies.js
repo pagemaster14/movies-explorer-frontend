@@ -8,10 +8,15 @@ import Footer from "../Footer/Footer";
 function Movies(props) {
   return (
     <>
-    <Header/>
-<SearchForm/>
-<MoviesCardList/>
-<Footer/>
+      <Header />
+      <main className="movies">
+      <SearchForm />
+      <MoviesCardList />
+      <button className="movies_button">
+        Ещё
+      </button>
+      </main>
+      <Footer />
     </>
   );
 }

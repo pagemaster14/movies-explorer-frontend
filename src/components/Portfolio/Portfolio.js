@@ -7,13 +7,13 @@ function Portfolio(props) {
 Портфолио
 </h2>
 <div className="portfolio__links">
-<a href="https://github.com/pagemaster14/how-to-learn.git" target="blank" className="portfolio__link">
+<a href="https://github.com/pagemaster14/how-to-learn" target="blank" className="portfolio__link">
 Статичный сайт
 </a>
-<a href="https://github.com/pagemaster14/russian-travel.git" target="blank" className="portfolio__link">
+<a href="https://github.com/pagemaster14/russian-travel" target="blank" className="portfolio__link">
 Адаптивный сайт
 </a>
-<a href="https://github.com/pagemaster14/mesto.git" target="blank" className="portfolio__link">
+<a href="https://github.com/pagemaster14/mesto" target="blank" className="portfolio__link">
 Одностраничное приложение
 </a>
 </div>

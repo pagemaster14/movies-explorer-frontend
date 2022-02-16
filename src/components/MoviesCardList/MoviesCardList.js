@@ -10,9 +10,6 @@ function MoviesCardList(props) {
         <MoviesCard/>
         <MoviesCard/>
     </div>
-    <button className="moviescardlist_button">
-    Ещё
-    </button>
 </section>
     );
   }
