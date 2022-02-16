@@ -1,0 +1,132 @@
+.techs {
+    background-color: #F5F5F5;
+    padding: 0 14px 0;
+}
+
+@media screen and (min-width: 768px) {
+    .techs {
+        padding: 0 50px 0;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .techs {
+        padding: 0 70px 0;
+    }
+}
+
+.techs__title {
+    margin: 0;
+    padding: 70px 4px 28px;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.04em;
+    border-bottom: 1px solid #000000;
+}
+
+@media screen and (min-width: 768px) {
+    .techs__title {
+        padding: 90px 0 23px;
+        font-size: 22px;
+        line-height: 27px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .techs__title {
+        padding: 100px 0 23px;
+    }
+}
+
+.techs__subtitle {
+    margin: 0;
+    font-size: 30px;
+    line-height: 36px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    padding-top: 60px;
+}
+
+@media screen and (min-width: 768px) {
+    .techs__subtitle {
+        padding-top: 80px;
+        font-size: 50px;
+        line-height: 58px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .techs__subtitle {
+        padding-top: 90px;
+    }
+}
+
+.techs__text {
+    margin: 0;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    padding-top: 24px;
+}
+
+@media screen and (min-width: 768px) {
+    .techs__text {
+        padding: 22px 104px 0;
+        font-size: 12px;
+        line-height: 18px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .techs__text {
+        padding: 26px 340px 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+}
+
+.techs__list {
+    padding: 50px 57px 70px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 84px);
+    gap: 10px;
+    margin: 0;
+    justify-content: center;
+    list-style-type: none;
+}
+
+@media screen and (min-width: 768px) {
+    .techs__list {
+        padding: 83px 0 90px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .techs__list {
+        padding: 100px 0;
+        grid-template-columns: repeat(auto-fit, 90px);
+    }
+}
+
+.techs__list-text {
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    letter-spacing: -0.04em;
+    background: #E8E8E8;
+    border-radius: 10px;
+    margin: 0;
+    padding: 21px 0;  
+}
+
+@media screen and (min-width: 1280px) {
+    .techs__list-text {
+        font-size: 14px;
+        line-height: 17px;
+        padding: 21px 0 22px;
+    }
+}
