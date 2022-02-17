@@ -1,6 +1,13 @@
+.movies {
+    display: flex;
+    flex-direction: column;
+}
+
 .movies_button {
+    align-self: center;
     width: 100%;
-    margin: 50px 0 80px;
+    max-width: 300px;
+    margin: 50px 10px 80px;
     padding: 11px 0 9px;
     font-weight: 500;
     font-size: 12px;
@@ -14,4 +21,18 @@
 
 .movies_button:hover {
     opacity: 0.6;
+}
+
+@media screen and (min-width: 768px) {
+    .movies_button {
+        max-width: 708px;
+        margin: 50px 30px 80px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .movies_button {
+        max-width: 1140px;
+        margin: 50px 70px 80px;
+    }
 }
