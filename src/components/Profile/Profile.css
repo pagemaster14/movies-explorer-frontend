@@ -38,6 +38,7 @@
 }
 
 .profile__input-container {
+    position: relative;
     display: flex;
     justify-content: space-between;
 }
@@ -69,6 +70,25 @@
     border: none;
 }
 
+.profile__input:focus {
+    outline: none;
+  }
+
+.profile__input_invalid {
+    border-bottom: 1px solid #FF6838;
+}
+
+.profile__input-error {
+    position: absolute;
+    top: calc(100% + 3px);
+    left: 0;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    color: #EE3465;
+}
+
+
 .profile__button {
     margin-top: 379px;
     padding: 0;
@@ -98,6 +118,12 @@
 
 .profile__button:hover {
     opacity: 0.6;
+}
+
+.profile__button_inactive {
+    background-color: #F8F8F8;
+    color: #C2C2C2;
+    cursor: default;
 }
 
 .profile__exit {

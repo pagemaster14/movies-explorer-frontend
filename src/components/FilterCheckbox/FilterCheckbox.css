@@ -19,6 +19,17 @@
 }
 
 .filtercheckbox__button {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.filtercheckbox__button:hover {
+    opacity: 0.6;
+}
+
+.filter-checkbox__checkbox {
     min-width: 36px;
     background-color: inherit;
     background-image: url(../../images/smalltumboff.svg);
@@ -28,13 +39,9 @@
     padding: 0;
     transition: opacity .5s ease 0.5s;
     cursor: pointer;
-}
+  }
 
-.filtercheckbox__button:hover {
-    opacity: 0.6;
-}
-
-.filtercheckbox__button_active {
+.filtercheckbox__button:checked + .filter-checkbox__checkbox {
     background-image: url(../../images/smalltumb.svg);
 }
 

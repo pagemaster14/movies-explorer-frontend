@@ -11,7 +11,7 @@ import Footer from "../Footer/Footer";
 function Main(props) {
   return (
     <>
-      <Header />
+      <Header/>
       <main className="main">
         <Promo />
         <AboutProject />

@@ -1,4 +1,6 @@
 .moviescardlist {
+    display: flex;
+    flex-direction: column;
     margin: 40px 10px 0;
     min-height: 271px;
 }
@@ -36,4 +38,43 @@
         grid-template-columns: 360px 360px 360px;
         grid-template-rows: repeat(2, 319px);
     }
+}
+
+.more_button {
+    display: none;
+    align-self: center;
+    width: 100%;
+    max-width: 300px;
+    margin: 50px 10px 80px;
+    padding: 11px 0 9px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    background-color: #F9F9F9;
+    border-radius: 6px;
+    border: none;
+    transition: opacity .5s ease 0.5s;
+    cursor: pointer;
+}
+
+.more_button:hover {
+    opacity: 0.6;
+}
+
+@media screen and (min-width: 768px) {
+    .more_button {
+        max-width: 708px;
+        margin: 50px 30px 80px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .more_button {
+        max-width: 1140px;
+        margin: 50px 70px 80px;
+    }
+}
+
+.more_button_active {
+    display: block;
 }

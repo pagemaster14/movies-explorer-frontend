@@ -89,7 +89,7 @@
 
 .navigation-nav__link {
     margin: 0;
-    font-weight: 500;
+    font-weight: normal;
     font-size: 13px;
     line-height: 18px;
     text-align: right;
@@ -104,8 +104,11 @@
     opacity: 0.6;
 }
 
+.navigation-nav__link_active {
+    font-weight: 500;
+}
+
 .navigation-nav__link:nth-child(2) {
-    font-weight: normal;
     margin-left: 16px;
 }
 

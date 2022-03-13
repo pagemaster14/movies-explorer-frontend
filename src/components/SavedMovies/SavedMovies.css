@@ -1,3 +1,17 @@
+.savedmovies {
+    display: flex;
+    flex-direction: column;
+}
+
 .savedmovies__devider {
     height: 140px;
 }
+
+.savedmovies__not-found {
+    margin: 20px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+  }
