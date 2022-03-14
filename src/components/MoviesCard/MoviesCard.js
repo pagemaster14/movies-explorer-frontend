@@ -23,7 +23,7 @@ function MoviesCard(props) {
       <p className="moviescard__duration">{`${Math.floor(
         (props.movie.duration) / 60
       )}ч ${(props.movie.duration) % 60}м`}</p>
-      <a href={props.movie.trailerLink} target="blank" className="moviescard__trailer">
+      <a href={props.movie.trailerLink || props.movie.trailer} target="blank" className="moviescard__trailer">
       </a>
       <Switch>
         <Route path="/movies">
