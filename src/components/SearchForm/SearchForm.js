@@ -3,25 +3,25 @@ import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
 function SearchForm(props) {
-  const [findedMovie, setFindedMovie] = React.useState('');
 
   function handleSearchMovie(e) {
     const input = document.getElementById('name');
     input.setCustomValidity('');
-    setFindedMovie(e.target.value);
+    props.setFindedMovie(e.target.value);
   }
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    props.onSearch(findedMovie);
+    props.onSearch(props.findedMovie);
+    localStorage.setItem('lastSearchName', JSON.stringify(props.findedMovie));
   }
 
   React.useEffect(() => {
-    if (!findedMovie) {
+    if (!props.findedMovie) {
       const input = document.getElementById('name');
       input.setCustomValidity('Нужно ввести ключевое слово');
     }
-  }, [findedMovie]);
+  }, [props.findedMovie]);
 
   return (
     <section className="searchform">
@@ -29,9 +29,8 @@ function SearchForm(props) {
         <input type="text" name="name" id="name"
           placeholder="Фильм"
           className="searchform__text"
-          required minLength="2"
-          maxLength="40"
-          value={findedMovie}
+          required
+          value={props.findedMovie}
           onChange={handleSearchMovie}
         />
         <button type="submit" className="searchform__formbutton">

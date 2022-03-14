@@ -4,6 +4,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
+import { SHORT_MOVIE_DURATION } from "../../ulits/constants";
 
 function SavedMovies(props) {
   const [isSearchDone, setIsSearchDone] = React.useState(false);
@@ -16,7 +17,7 @@ function SavedMovies(props) {
     let result;
 
     result = moviesToFilter.filter((movie) => {
-      return movie.nameRU.toLowerCase().indexOf(findedMovie.toLowerCase()) !== -1;
+      return movie.nameRU.toLowerCase().indexOf(findedMovie.toLowerCase().trim()) !== -1;
     })
     return result;
   }
@@ -42,7 +43,7 @@ function SavedMovies(props) {
   function filterShortMovies(arr) {
     if (arr.length !== 0 || arr !== "undefind") {
       return arr.filter((movie) =>
-        shortMovies ? movie.duration <= 40 : true
+        shortMovies ? movie.duration <= SHORT_MOVIE_DURATION : true
       );
     }
   }
@@ -51,7 +52,8 @@ function SavedMovies(props) {
     <>
       <Header />
       <main className="savedmovies">
-      <SearchForm onSearch={handleSearch} onFilter={handleCheckBox}/>
+      <SearchForm onSearch={handleSearch} onFilter={handleCheckBox}
+      findedMovie={findedMovie} setFindedMovie={setFindedMovie}/>
       {isSearchDone
       ? filteredMovies.length > 0
       ? <MoviesCardList
@@ -69,6 +71,8 @@ function SavedMovies(props) {
 }
       <div className="savedmovies__devider">
       </div>
+      <span className="form__api-response"
+        >{props.deleteMovieRequestStatus}{props.getDataRequestStatus}</span>
       </main>
       <Footer />
     </>

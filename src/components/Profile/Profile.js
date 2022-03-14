@@ -10,9 +10,8 @@ function Profile(props) {
     const currentUser = React.useContext(CurrentUserContext);
 
     const isDisabled = !isValid || props.isSending;
-    const submitButtonClassName = `profile__button ${
-        isDisabled && "profile__button_inactive"
-      }`;
+    const submitButtonClassName = `profile__button ${isDisabled && "profile__button_inactive"
+        }`;
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -21,9 +20,9 @@ function Profile(props) {
 
     React.useEffect(() => {
         if (currentUser) {
-          resetForm(currentUser, {}, false);
+            resetForm(currentUser, {}, false);
         }
-      }, [currentUser, resetForm]);
+    }, [currentUser, resetForm]);
 
     return (
         <>
@@ -38,9 +37,8 @@ function Profile(props) {
                             Имя
                         </p>
                         <input type="text" name="name" id="name"
-                            className={`profile__input ${
-                                errors.name && "profile__input_invalid"
-                              }`} placeholder="Сергей" required
+                            className={`profile__input ${errors.name && "profile__input_invalid"
+                                }`} placeholder="Сергей" required
                             pattern="^[а-яА-ЯёЁa-zA-Z -]+$"
                             minLength="2"
                             maxLength="40"
@@ -53,9 +51,8 @@ function Profile(props) {
                         </p>
                         <input type="text"
                             name="email"
-                            id="email" className={`profile__input ${
-                                errors.email && "profile__input_invalid"
-                              }`}
+                            id="email" className={`profile__input ${errors.email && "profile__input_invalid"
+                                }`}
                             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                             placeholder="pochta@yandex.ru" required minLength="2"
                             maxLength="200"
@@ -63,8 +60,8 @@ function Profile(props) {
                         <span className="profile__input-error" id="email-error">{errors.email || ''}</span>
                     </div>
                     <span
-            className="form__api-response"
-          >{props.requestStatus}</span>
+                        className="form__api-response"
+                    >{props.requestStatus}{props.getDataRequestStatus}</span>
                     <button className={submitButtonClassName} disabled={isDisabled}>
                         Редактировать
                     </button>

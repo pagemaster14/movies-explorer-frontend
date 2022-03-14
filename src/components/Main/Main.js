@@ -13,6 +13,8 @@ function Main(props) {
     <>
       <Header/>
       <main className="main">
+      <span className="form__api-response"
+        >{props.getDataRequestStatus}</span>
         <Promo />
         <AboutProject />
         <Techs />

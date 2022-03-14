@@ -18,9 +18,10 @@ function App() {
   const [isRegisterDataSending, setIsRegisterDataSending] = React.useState(false);
   const [isLoginDataSending, setIsLoginDataSending] = React.useState(false);
   const [isProfileDataSending, setIsProfileDataSending] = React.useState(false);
-  const [savedMovies, setSavedMovies] =  React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
   const history = useHistory();
 
+  const [getDataRequestStatus, setGetDataRequestStatus] = React.useState([]);
   React.useEffect(() => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
@@ -31,7 +32,13 @@ function App() {
           }
         })
         .catch(err => {
-          console.log(err)
+          if (err === 'Ошибка: 404') {
+            setGetDataRequestStatus(['Нет пользователя с таким id']
+            );
+          } else {
+            setGetDataRequestStatus(['При загрузке данных пользователя произошла ошибка']
+            );
+          }
         })
     }
   }, []);
@@ -43,7 +50,15 @@ function App() {
         .then((currentUser) => {
           setCurrentUser(currentUser);
         })
-        .catch((err) => console.log(err))
+        .catch(err => {
+          if (err === 'Ошибка: 404') {
+            setGetDataRequestStatus(['Нет пользователя с таким id']
+            );
+          } else {
+            setGetDataRequestStatus(['При загрузке данных пользователя произошла ошибка']
+            );
+          }
+        })
     }
   }, [loggedIn])
 
@@ -127,9 +142,13 @@ function App() {
     setState(false);
     localStorage.removeItem("jwt");
     localStorage.removeItem("initialMovies");
+    localStorage.removeItem("lastSearch");
+    localStorage.removeItem("lastSearchName");
+    localStorage.removeItem("lastCheckBoxState");
     history.push('/');
   }
 
+  const [saveMovieRequestStatus, setSaveMovieRequestStatus] = React.useState([]);
   function handleSaveMovie(movie) {
     const jwt = localStorage.getItem('jwt');
     mainApi.saveMovie({ movie, jwt })
@@ -140,10 +159,15 @@ function App() {
         ]);
       })
       .catch(err => {
-        console.log(err)
+        if (err === 'Ошибка: 400') {
+          setSaveMovieRequestStatus(['Карточка с фильмом содержит невалидные данные']);
+        } else {
+          setSaveMovieRequestStatus(['Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз']);
+        }
       })
   }
 
+  const [deleteMovieRequestStatus, setDeleteMovieRequestStatus] = React.useState([]);
   function handleDeleteMovie(movie) {
     const jwt = localStorage.getItem('jwt');
     mainApi.deleteMovie({ movie, jwt })
@@ -151,7 +175,13 @@ function App() {
         setSavedMovies((movies) => movies.filter((m) => m._id !== movie._id));
       })
       .catch(err => {
-        console.log(err)
+        if (err === 'Ошибка: 404') {
+          setDeleteMovieRequestStatus(['Фильм с указанным _id не найден']);
+        } else if (err === 'Ошибка: 403') {
+          setDeleteMovieRequestStatus(['Недостаточно прав для удаления']);
+        } else {
+          setDeleteMovieRequestStatus(['Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз']);
+        }
       })
   }
 
@@ -163,7 +193,9 @@ function App() {
           setSavedMovies(data.filter((i) => i.owner._id === currentUser._id));
         })
         .catch(err => {
-          console.log(err)
+          if (err) {
+            setGetDataRequestStatus(['При загрузке данных пользователя произошла ошибка']);
+          }
         })
     }
   }, [currentUser]);
@@ -176,6 +208,7 @@ function App() {
             exact
             path="/"
             component={Main}
+            getDataRequestStatus={getDataRequestStatus}
           />
           <ProtectedRoute
             exact
@@ -184,6 +217,9 @@ function App() {
             savedMovies={savedMovies}
             onMovieSave={handleSaveMovie}
             onMovieDelete={handleDeleteMovie}
+            saveMovieRequestStatus={saveMovieRequestStatus}
+            deleteMovieRequestStatus={deleteMovieRequestStatus}
+            getDataRequestStatus={getDataRequestStatus}
           />
           <ProtectedRoute
             exact
@@ -191,11 +227,13 @@ function App() {
             component={SavedMovies}
             savedMovies={savedMovies}
             onMovieDelete={handleDeleteMovie}
+            deleteMovieRequestStatus={deleteMovieRequestStatus}
+            getDataRequestStatus={getDataRequestStatus}
           />
           <ProtectedRoute exact path="/profile"
             component={Profile} signOut={signOut}
             onUpdateUser={handleUpdateUser}
-            requestStatus={profileRequestStatus} isSending={isProfileDataSending} />
+            requestStatus={profileRequestStatus} isSending={isProfileDataSending} getDataRequestStatus={getDataRequestStatus} />
           <Route path="/signup">
             {loggedIn ? <Redirect to="/" /> :
               <Register handleRegister={handleRegister} requestStatus={registerRequestStatus} isSending={isRegisterDataSending} />

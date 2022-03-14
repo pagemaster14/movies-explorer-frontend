@@ -86,6 +86,7 @@ function Navigation(props) {
           type="button"
           arialabel="Open"
           className="navigation__button"
+          onClick={handlePopupOpen}
         ></button>
         <div className="navigation-nav__info">
           <NavLink to="/movies" className="navigation-nav__link">

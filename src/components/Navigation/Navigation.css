@@ -36,7 +36,7 @@
     }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 800px) {
     .navigation__button {
         display: none;
     }
@@ -80,7 +80,7 @@
     display: none;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 800px) {
     .navigation-nav__info {
         display: flex;
         height: 32px;

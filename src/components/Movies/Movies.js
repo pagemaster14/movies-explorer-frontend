@@ -6,6 +6,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Preloader from "../Preloader/Preloader";
 import api from "../../ulits/MoviesApi";
+import { SHORT_MOVIE_DURATION } from "../../ulits/constants";
 
 function Movies(props) {
   const [movies, setMovies] = React.useState([]);
@@ -25,11 +26,11 @@ function Movies(props) {
     let result;
 
     result = moviesToFilter.filter((movie) => {
-      return movie.nameRU.toLowerCase().indexOf(findedMovie.toLowerCase()) !== -1;
+      return movie.nameRU.toLowerCase().indexOf(findedMovie.toLowerCase().trim()) !== -1;
     })
     return result;
   }
-  
+
   const [moviesRequestStatus, setMoviesRequestStatus] = React.useState([]);
   function handleSearch(findedMovie) {
     setMoviesToRender([]);
@@ -112,21 +113,41 @@ function Movies(props) {
 
   function handleCheckBox() {
     setShortMovies(!shortMovies);
+    localStorage.setItem('lastCheckBoxState', JSON.stringify(!shortMovies));
   }
 
+  React.useEffect(() => {
+    const lastCheckBoxState = JSON.parse(localStorage.getItem('lastCheckBoxState'));
+    if (lastCheckBoxState) {
+      setShortMovies(lastCheckBoxState);
+    }
+  }, []);
+
   function filterShortMovies(arr) {
+    localStorage.setItem('lastSearch', JSON.stringify(filteredMovies));
     if (arr.length !== 0 || arr !== "undefind") {
       return arr.filter((movie) =>
-        shortMovies ? movie.duration <= 40 : true
+        shortMovies ? movie.duration <= SHORT_MOVIE_DURATION : true
       );
     }
   }
+
+  React.useEffect(() => {
+    const lastSearchNameValue = JSON.parse(localStorage.getItem('lastSearchName'));
+    if (lastSearchNameValue) {
+      setFindedMovie(lastSearchNameValue);
+    }
+  }, []);
+
+  const lastSearchArr = JSON.parse(localStorage.getItem('lastSearch'));
+  const lastSearchMovies = lastSearchArr
 
   return (
     <>
       <Header />
       <main className="movies">
         <SearchForm onSearch={handleSearch} onFilter={handleCheckBox}
+          findedMovie={findedMovie} setFindedMovie={setFindedMovie}
           isShortMovie={shortMovies} />
         {isSearching
           ? <Preloader />
@@ -146,10 +167,20 @@ function Movies(props) {
                   Ничего не найдено
                 </span>
               )
-            : ('')
+            : lastSearchArr
+              ? <MoviesCardList
+                movies={lastSearchMovies}
+                onMoreButtonClick={handleMoreButtonClick}
+                isMoreButtonVisible={isMoreButtonVisible}
+                savedMovies={props.savedMovies}
+                onMovieSave={props.onMovieSave}
+                onMovieDelete={props.onMovieDelete}
+              />
+              : ('')
         }
         <span className="form__api-response"
-        >{moviesRequestStatus}</span>
+        >{moviesRequestStatus}{props.saveMovieRequestStatus}
+          {props.deleteMovieRequestStatus}{props.getDataRequestStatus}</span>
       </main>
       <Footer />
     </>
