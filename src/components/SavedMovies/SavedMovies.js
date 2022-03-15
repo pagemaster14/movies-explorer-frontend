@@ -9,31 +9,32 @@ import { SHORT_MOVIE_DURATION } from "../../ulits/constants";
 function SavedMovies(props) {
   const [isSearchDone, setIsSearchDone] = React.useState(false);
   const [filteredMovies, setFilteredMovies] = React.useState([]);
-  const [findedMovie, setFindedMovie] = React.useState('');
+  const [findedSavedMovie, setSavedFindedMovie] = React.useState('');
   const [shortMovies, setShortMovies] = React.useState(false);
 
-  function filterMovies(movies, findedMovie) {
+  function filterMovies(movies, findedSavedMovie) {
     let moviesToFilter = movies;
     let result;
 
     result = moviesToFilter.filter((movie) => {
-      return movie.nameRU.toLowerCase().indexOf(findedMovie.toLowerCase().trim()) !== -1;
+      return movie.nameRU.toLowerCase().indexOf(findedSavedMovie.toLowerCase().trim()) !== -1;
     })
     return result;
   }
 
-  function handleSearch(findedMovie) {
-    setFindedMovie(findedMovie);
-    const searchResult = filterMovies(props.savedMovies, findedMovie);
+  function handleSearch(findedSavedMovie) {
+    setSavedFindedMovie(findedSavedMovie);
+    const searchResult = filterMovies(props.savedMovies, findedSavedMovie);
     setFilteredMovies(searchResult);
     setIsSearchDone(true);
   }
 
   React.useEffect(() => {
     if (filteredMovies.length > 0) {
-      const searchResult = filterMovies(props.savedMovies, findedMovie);
+      const searchResult = filterMovies(props.savedMovies, findedSavedMovie);
       setFilteredMovies(searchResult);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.savedMovies]);
 
   function handleCheckBox() {
@@ -53,7 +54,7 @@ function SavedMovies(props) {
       <Header />
       <main className="savedmovies">
       <SearchForm onSearch={handleSearch} onFilter={handleCheckBox}
-      findedMovie={findedMovie} setFindedMovie={setFindedMovie}/>
+      findedSavedMovie={findedSavedMovie} setSavedFindedMovie={setSavedFindedMovie}/>
       {isSearchDone
       ? filteredMovies.length > 0
       ? <MoviesCardList
@@ -65,7 +66,7 @@ function SavedMovies(props) {
       </span>
       )
       : <MoviesCardList
-      movies={props.savedMovies}
+      movies={filterShortMovies(props.savedMovies)}
       onMovieDelete={props.onMovieDelete}
     />
 }

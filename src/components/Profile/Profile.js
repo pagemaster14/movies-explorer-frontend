@@ -8,6 +8,7 @@ import { useFormWithValidation } from "../../hooks/useForm"
 function Profile(props) {
     const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
     const currentUser = React.useContext(CurrentUserContext);
+    
 
     const isDisabled = !isValid || props.isSending;
     const submitButtonClassName = `profile__button ${isDisabled && "profile__button_inactive"
@@ -15,7 +16,11 @@ function Profile(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        props.onUpdateUser(values);
+        if (values.email !== currentUser.email || values.name !== currentUser.name) {
+            props.onUpdateUser(values);
+        } else {
+            props.setProfileRequestStatus(['Для редактирования профиля, пожалуйста, поменяйте имя, или почту пользователя']);
+        }
     }
 
     React.useEffect(() => {
@@ -23,6 +28,11 @@ function Profile(props) {
             resetForm(currentUser, {}, false);
         }
     }, [currentUser, resetForm]);
+
+    React.useEffect(() => {
+        props.setProfileRequestStatus([]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <>

@@ -139,6 +139,8 @@ function Movies(props) {
     if (lastSearchNameValue) {
       setFindedMovie(lastSearchNameValue)
     }
+    props.setSaveMovieRequestStatus([])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -146,7 +148,6 @@ function Movies(props) {
       <Header />
       <main className="movies">
         <SearchForm onSearch={handleSearch} onFilter={handleCheckBox}
-          findedMovie={findedMovie} setFindedMovie={setFindedMovie}
           isShortMovie={shortMovies} />
         {isSearching
           ? <Preloader />

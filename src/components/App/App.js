@@ -150,6 +150,7 @@ function App() {
 
   const [saveMovieRequestStatus, setSaveMovieRequestStatus] = React.useState([]);
   function handleSaveMovie(movie) {
+    setSaveMovieRequestStatus([]);
     const jwt = localStorage.getItem('jwt');
     mainApi.saveMovie({ movie, jwt })
       .then((addSavedMovie) => {
@@ -218,6 +219,7 @@ function App() {
             onMovieSave={handleSaveMovie}
             onMovieDelete={handleDeleteMovie}
             saveMovieRequestStatus={saveMovieRequestStatus}
+            setSaveMovieRequestStatus={setSaveMovieRequestStatus}
             deleteMovieRequestStatus={deleteMovieRequestStatus}
             getDataRequestStatus={getDataRequestStatus}
           />
@@ -233,7 +235,9 @@ function App() {
           <ProtectedRoute exact path="/profile"
             component={Profile} signOut={signOut}
             onUpdateUser={handleUpdateUser}
-            requestStatus={profileRequestStatus} isSending={isProfileDataSending} getDataRequestStatus={getDataRequestStatus} />
+            requestStatus={profileRequestStatus}
+            setProfileRequestStatus={setProfileRequestStatus}
+            isSending={isProfileDataSending} getDataRequestStatus={getDataRequestStatus} />
           <Route path="/signup">
             {loggedIn ? <Redirect to="/" /> :
               <Register handleRegister={handleRegister} requestStatus={registerRequestStatus} isSending={isRegisterDataSending} />
