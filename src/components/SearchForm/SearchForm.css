@@ -31,12 +31,10 @@
 
 .searchform__text {
     width: calc(100% - 92px);
-    opacity: 0.2;
     font-family: Inter;
     font-weight: normal;
     font-size: 16px;
     line-height: 16px;
-    color: #A0A0A0;
     border: none;
     padding: 20px 0 20px 12px;
 }
@@ -54,6 +52,11 @@
         font-size: 18px;
         line-height: 20px;
     }
+}
+
+.searchform__text::placeholder {
+    opacity: 0.2;
+    color: #A0A0A0;
 }
 
 .searchform__formbutton {

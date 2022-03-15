@@ -3,36 +3,11 @@
     flex-direction: column;
 }
 
-.movies_button {
-    align-self: center;
-    width: 100%;
-    max-width: 300px;
-    margin: 50px 10px 80px;
-    padding: 11px 0 9px;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    background-color: #F9F9F9;
-    border-radius: 6px;
-    border: none;
-    transition: opacity .5s ease 0.5s;
-    cursor: pointer;
-}
-
-.movies_button:hover {
-    opacity: 0.6;
-}
-
-@media screen and (min-width: 768px) {
-    .movies_button {
-        max-width: 708px;
-        margin: 50px 30px 80px;
-    }
-}
-
-@media screen and (min-width: 1280px) {
-    .movies_button {
-        max-width: 1140px;
-        margin: 50px 70px 80px;
-    }
-}
+.movies__not-found {
+    margin: 20px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+  }

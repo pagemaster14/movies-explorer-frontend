@@ -11,8 +11,10 @@ import Footer from "../Footer/Footer";
 function Main(props) {
   return (
     <>
-      <Header />
+      <Header/>
       <main className="main">
+      <span className="form__api-response"
+        >{props.getDataRequestStatus}</span>
         <Promo />
         <AboutProject />
         <Techs />

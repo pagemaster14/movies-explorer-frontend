@@ -4,12 +4,13 @@ import "./MenuPopup.css";
 
 function MenuPopup(props) {
     return (
-        <div className="menupopup">
+        <div className={`menupopup ${props.isPopupOpen ? "menupopup_opened" : ""}`} onMouseDown={props.handleOverlayClose}>
             <div className="menupopup__container">
                 <button
                     type="button"
                     arialabel="Close"
                     className="menupopup__close"
+                    onClick={props.handlePopupClose}
                 ></button>
                 <div className="menupopup__info">
                     <Link to="/" className="menupopup__link">
