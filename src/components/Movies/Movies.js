@@ -98,6 +98,7 @@ function Movies(props) {
       } else {
         setMoviesToRender(filteredMovies);
       }
+      localStorage.setItem('lastSearch', JSON.stringify(filteredMovies));
     }
   }, [filteredMovies, firstResultsNumber]);
 
@@ -123,8 +124,9 @@ function Movies(props) {
     }
   }, []);
 
+  const lastSearchArr = JSON.parse(localStorage.getItem('lastSearch'));
+
   function filterShortMovies(arr) {
-    localStorage.setItem('lastSearch', JSON.stringify(filteredMovies));
     if (arr.length !== 0 || arr !== "undefind") {
       return arr.filter((movie) =>
         shortMovies ? movie.duration <= SHORT_MOVIE_DURATION : true
@@ -135,12 +137,9 @@ function Movies(props) {
   React.useEffect(() => {
     const lastSearchNameValue = JSON.parse(localStorage.getItem('lastSearchName'));
     if (lastSearchNameValue) {
-      setFindedMovie(lastSearchNameValue);
+      setFindedMovie(lastSearchNameValue)
     }
   }, []);
-
-  const lastSearchArr = JSON.parse(localStorage.getItem('lastSearch'));
-  const lastSearchMovies = lastSearchArr
 
   return (
     <>
@@ -169,7 +168,7 @@ function Movies(props) {
               )
             : lastSearchArr
               ? <MoviesCardList
-                movies={lastSearchMovies}
+                movies={filterShortMovies(lastSearchArr)}
                 onMoreButtonClick={handleMoreButtonClick}
                 isMoreButtonVisible={isMoreButtonVisible}
                 savedMovies={props.savedMovies}
